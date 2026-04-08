@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HBD Meira Sayang 🤍🖤</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Caveat:wght@700&display=swap');
+
+        body {
+            background-color: #000;
+            color: #fff;
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        #main-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 30px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            width: 85%;
+            max-width: 400px;
+            z-index: 10;
+        }
+
+        .profile-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 3px solid #ff4d6d;
+            object-fit: cover;
+            margin-bottom: 15px;
+            box-shadow: 0 0 20px rgba(255, 77, 109, 0.5);
+        }
+
+        h1 { font-family: 'Caveat', cursive; color: #ff4d6d; font-size: 2.5rem; margin: 10px 0; }
+        p { font-size: 0.9rem; line-height: 1.5; color: #ccc; }
+
+        .btn {
+            background: #ff4d6d;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            margin-top: 20px;
+            transition: 0.3s;
+        }
+
+        .btn:hover { transform: scale(1.05); background: #ff758f; }
+
+        /* Ngeselin Button */
+        #btn-no { position: absolute; transition: 0.1s; }
+
+        /* Slider Section */
+        #slider-container {
+            display: none;
+            margin-top: 20px;
+        }
+
+        input[type=range] {
+            width: 100%;
+            accent-color: #ff4d6d;
+        }
+
+        /* Flower Animation */
+        .flower {
+            position: absolute;
+            top: -10%;
+            z-index: 1;
+            font-size: 20px;
+            user-select: none;
+            pointer-events: none;
+        }
+
+        @keyframes fall {
+            to { transform: translateY(110vh) rotate(360deg); }
+        }
+
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+
+    <div id="main-card">
+        <img src="https://uploads.onecompiler.io/44jphb2ba/44jqx264g/IMG-20251107-WA0066.jpg" alt="Meira" class="profile-img">
+        
+        <div id="step1">
+            <h1>HBD Meira Sayangg! 🤍🖤</h1>
+            <p>Ehem... Ada yang nambah tua nih. <br> Masih sayang aku nggak hari ini?</p>
+            <button class="btn" onclick="nextStep(2)">Masih Dong!</button>
+            <button class="btn" id="btn-no" onmouseover="lariLu()">gk!</button>
+        </div>
+
+        <div id="step2" class="hidden">
+            <h1>Mau Kado Apa bebb?</h1>
+            <p>Pilih ya sayangku</p>
+            <button class="btn" onclick="nextStep(3)">Sepatu Adidas</button>
+            <button class="btn" onclick="nextStep(3)">buket matahari</button>
+            <button class="btn" onclick="nextStep(3)">Peluk Aku Sepuasnya</button>
+            <p style="font-size: 0.7rem; margin-top: 10px;">*Pilihan 1 & 2 sedang gangguan teknis selamanya.</p>
+        </div>
+
+        <div id="step3" class="hidden">
+            <h1>Ngedate Dimana?</h1>
+            <p>Tentukan lokasi sekarang!</p>
+            <button class="btn" onclick="nextStep(4)">Jambi</button>
+            <button class="btn" onclick="nextStep(4)">Brebes </button>
+            <button class="btn" onclick="nextStep(4)">Jambi & Brebes</button>
+        </div>
+
+        <div id="step4" class="hidden">
+            <h1>Seberapa Sayang?</h1>
+            <p>Geser ke kanan sampai 1000%!</p>
+            <input type="range" id="love-slider" min="0" max="1000" value="0" oninput="updateSlider(this.value)">
+            <h2 id="percent-val">0%</h2>
+            <div id="final-btn-container" class="hidden">
+                <button class="btn" onclick="celebrate()">Klik Untuk Kejutan! ✨</button>
+            </div>
+        </div>
+
+        <div id="step5" class="hidden">
+            <h1>I Love You, Meira! 🤍🖤</h1>
+            <p>Makasih udah sabar sama aku yang ngeselin ini. Semoga bahagia terus bareng aku ya!</p>
+            <p style="font-style: italic;">"Cintaku ke kamu itu kayak bunga ini, nggak abis-abis!"</p>
+        </div>
+    </div>
+
+    <script>
+        // Fungsi tombol "Enggak" yang lari-lari
+        function lariLu() {
+            const btnNo = document.getElementById('btn-no');
+            const x = Math.random() * (window.innerWidth - 100);
+            const y = Math.random() * (window.innerHeight - 50);
+            btnNo.style.left = x + 'px';
+            btnNo.style.top = y + 'px';
+        }
+
+        // Fungsi pindah step
+        function nextStep(step) {
+            document.getElementById('step' + (step-1)).classList.add('hidden');
+            document.getElementById('step' + step).classList.remove('hidden');
+        }
+
+        // Fungsi Slider 1000%
+        function updateSlider(val) {
+            const display = document.getElementById('percent-val');
+            display.innerText = val + "%";
+            if (val >= 1000) {
+                display.innerText = "1000000% !!! 🔥";
+                display.style.color = "#ff4d6d";
+                document.getElementById('final-btn-container').classList.remove('hidden');
+            }
+        }
+
+        // Fungsi Hujan Bunga
+        function celebrate() {
+            nextStep(5);
+            setInterval(createFlower, 150);
+        }
+
+        function createFlower() {
+            const flowerIcons = ['🌸', '🌹', '🌺', '🤍', '🖤', '✨'];
+            const flower = document.createElement('div');
+            flower.classList.add('flower');
+            flower.innerText = flowerIcons[Math.floor(Math.random() * flowerIcons.length)];
+            flower.style.left = Math.random() * 100 + 'vw';
+            flower.style.animation = `fall ${Math.random() * 3 + 2}s linear forwards`;
+            document.body.appendChild(flower);
+
+            setTimeout(() => {
+                flower.remove();
+            }, 5000);
+        }
+    </script>
+</body>
+</html>
